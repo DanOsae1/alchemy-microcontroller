@@ -4,6 +4,7 @@ import com.osaebros.model.State;
 import com.osaebros.server.AlchemyRequest;
 import com.osaebros.util.app.FXModuleOrchestrator;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 public class ApplicationFXModuleController extends FXModuleOrchestrator<State> {
@@ -45,7 +46,12 @@ public class ApplicationFXModuleController extends FXModuleOrchestrator<State> {
         ledFXModule.blink();
     }
 
-    public void dispense(AlchemyRequest request) {
-
+    public CompletableFuture<Object> dispense(AlchemyRequest request) {
+        log.info("Received request from web");
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Async dispense of cocktail");
+            ledFXModule.blinkViaBuiltInAction();
+            return null;
+        });
     }
 }

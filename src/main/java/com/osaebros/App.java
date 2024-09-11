@@ -3,13 +3,11 @@ package com.osaebros;
 import com.osaebros.model.State;
 import com.osaebros.modules.ApplicationFXModuleController;
 import com.osaebros.server.AlchemyServer;
-import com.osaebros.server.WebServerThreadPool;
 import com.osaebros.util.microprocessor.Pi4jContext;
 import com.osaebros.view.AlchemyGraphicalUI;
 import com.osaebros.view.AlchemyPhysicalUI;
 import com.osaebros.view.AlchemyPhysicalUIEmulator;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,19 +29,15 @@ public class App extends Application {
     private static final String APPLICATION_TITLE = "Alchemy App";
     private AlchemyServer server;
 
-    private ExecutorService executorService;
+    private ExecutorService executorService = Executors.newFixedThreadPool(15);
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void init() {
-        executorService = WebServerThreadPool.getThreadPool();
-    }
+    public void start(Stage primaryStage) {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
         State initialState = new State();
         applicationModule = new ApplicationFXModuleController(initialState);
 
@@ -51,19 +45,8 @@ public class App extends Application {
 
         Pane gui = new AlchemyGraphicalUI(applicationModule);
 
-        server = new AlchemyServer("", 3333, null, applicationModule);
-        executorService.submit(() -> {
-            try {
-                Thread thread = new Thread(server);
-                thread.start();
-            } catch (Exception e) {
-                Platform.runLater(() -> {
-                    //Update ui
-                    System.out.print(e.getMessage());
-                });
-            }
-
-        });
+        server = new AlchemyServer(3333, applicationModule);
+        executorService.execute(server);
 
         primaryStage.setTitle(APPLICATION_TITLE);
 

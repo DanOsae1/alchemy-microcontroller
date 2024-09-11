@@ -22,6 +22,32 @@ open module com.osaerbros {
     requires javafx.base;
     requires javafx.controls;
     requires javafx.web;
+    requires io.netty.all;
+    requires io.netty.buffer;
+    requires io.netty.handler;
+    requires io.netty.transport;
+    requires io.netty.codec.http;
+    requires io.netty.codec.http2;
+    requires io.netty.common;
+
+    requires io.netty.codec;
+    requires io.netty.codec.dns;
+    requires io.netty.codec.haproxy;
+
+//    requires io.netty.codec.memcache;
+//    requires io.netty.codec.mqtt;
+//    requires io.netty.codec.redis;
+//    requires io.netty.codec.smtp;
+//    requires io.netty.codec.socks;
+//    requires io.netty.codec.stomp;
+//    requires io.netty.codec.xml;
+//    requires io.netty.handler.proxy;
+    requires io.netty.resolver;
+    requires io.netty.resolver.dns;
+//    requires io.netty.transport.unix.common;
+//    requires io.netty.transport.rxtx;
+//    requires io.netty.transport.sctp;
+//    requires io.netty.transport.udt;
 
     // Module exports
 }
