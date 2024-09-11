@@ -31,8 +31,8 @@
         <pi.ipnumber>${pi.hostname}.local
         </pi.ipnumber>  <!-- change to concrete ip-number if hostname is not unique in wlan -->
         <pi.port>22</pi.port>
-        <pi.username>pi</pi.username>
-        <pi.password>pi4j</pi.password>
+        <pi.username>daniel</pi.username>
+        <pi.password>admin</pi.password>
         <pi.deploydirectory>/home/pi/deploy</pi.deploydirectory>
         <pi.jvmOptions/>
 
@@ -102,18 +102,19 @@
         </dependency>
         <!--/Server -->
 
-
         <!-- JavaFX  -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -125,7 +126,7 @@
             <artifactId>javafx-web</artifactId>
             <version>${javafx.version}</version>
         </dependency>
-
+        <!--/ JAVA FX-->
 
         <!-- Pi4J  -->
         <dependency>
@@ -133,16 +134,19 @@
             <artifactId>pi4j-core</artifactId>
             <version>${pi4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-plugin-raspberrypi</artifactId>
             <version>${pi4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-plugin-pigpio</artifactId>
             <version>${pi4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-plugin-linuxfs</artifactId>
