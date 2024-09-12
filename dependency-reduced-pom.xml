@@ -59,10 +59,6 @@
           <artifactId>maven-jar-plugin</artifactId>
           <version>${maven-jar-plugin.version}</version>
         </plugin>
-        <plugin>
-          <artifactId>maven-shade-plugin</artifactId>
-          <version>${maven-shade-plugin.version}</version>
-        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -79,8 +75,30 @@
         </executions>
         <configuration>
           <transformers>
+            <transformer>
+              <mainClass>${launcher.class}</mainClass>
+            </transformer>
             <transformer />
+            <transformer />
+            <transformer>
+              <addHeader>false</addHeader>
+            </transformer>
           </transformers>
+          <filters>
+            <filter>
+              <artifact>*:*</artifact>
+              <excludes>
+                <exclude>META-INF/*.SF</exclude>
+                <exclude>META-INF/*.DSA</exclude>
+                <exclude>META-INF/*.RSA</exclude>
+              </excludes>
+            </filter>
+          </filters>
+          <artifactSet>
+            <excludes>
+              <exclude>module-info.class</exclude>
+            </excludes>
+          </artifactSet>
         </configuration>
       </plugin>
       <plugin>
@@ -145,8 +163,15 @@
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
         <configuration>
           <outputDirectory>${project.build.directory}/distribution</outputDirectory>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${launcher.class}</mainClass>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
       <plugin>
@@ -302,7 +327,7 @@
     <ant-jsch.version>1.10.15</ant-jsch.version>
     <netty.version>4.1.113.Final</netty.version>
     <pi.username>daniel</pi.username>
-    <launcher.class>com.osaebros/com.osaebros.App</launcher.class>
+    <launcher.class>com.osaebros.App</launcher.class>
     <jackson.version>2.17.2</jackson.version>
     <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
     <pi.hostname>osaebros</pi.hostname>
