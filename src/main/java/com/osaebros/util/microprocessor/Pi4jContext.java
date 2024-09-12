@@ -45,7 +45,6 @@ public class Pi4jContext {
 
     public static Context context() {
         boolean isOnPi = runsOnPi();
-        log.info(() -> "GPIO initialized for %s".formatted((isOnPi ? "RaspPi" : "desktop")));
         Context context = createContext(isOnPi);
         printDeviceInformation(context);
         return context;
