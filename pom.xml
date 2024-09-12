@@ -24,8 +24,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <launcher.class>com.osaebros/com.osaebros.App</launcher.class>
-        <main.class>com.osaebros.App</main.class>
+        <launcher.class>com.osaebros.App</launcher.class>
 
         <!-- Set up for pi vars -->
         <pi.hostname>osaebros</pi.hostname>
