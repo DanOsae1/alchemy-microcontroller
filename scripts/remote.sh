@@ -12,7 +12,7 @@ sudo -E bash << EOF
 export XAUTHORITY=/home/$CURRENT_USER/.Xauthority
 
 # Run the Java command
-java
+java \
      -Dprism.verbose=true \
      -Dprism.trace=true \
      --module-path /usr/share/openjfx/lib \
