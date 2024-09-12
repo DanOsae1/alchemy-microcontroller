@@ -1,4 +1,4 @@
-open module com.osaerbros {
+open module com.osaebros {
     // Pi4J Modules
     requires com.pi4j;
     requires com.pi4j.library.pigpio;
@@ -31,8 +31,9 @@ open module com.osaerbros {
     requires io.netty.common;
 
     requires io.netty.codec;
-    requires io.netty.codec.dns;
-    requires io.netty.codec.haproxy;
+//    requires io.netty.codec.dns;
+//    requires io.netty.codec.haproxy;
+    requires io.netty.resolver;
 
 //    requires io.netty.codec.memcache;
 //    requires io.netty.codec.mqtt;
@@ -42,8 +43,8 @@ open module com.osaerbros {
 //    requires io.netty.codec.stomp;
 //    requires io.netty.codec.xml;
 //    requires io.netty.handler.proxy;
-    requires io.netty.resolver;
-    requires io.netty.resolver.dns;
+
+//    requires io.netty.resolver.dns;
 //    requires io.netty.transport.unix.common;
 //    requires io.netty.transport.rxtx;
 //    requires io.netty.transport.sctp;
