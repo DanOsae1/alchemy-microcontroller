@@ -29,7 +29,7 @@
         <!-- Set up for pi vars -->
         <pi.hostname>osaebros</pi.hostname>
         <pi.ipnumber>192.168.4.88</pi.ipnumber>  <!-- change to concrete ip-number if hostname is not unique in wlan -->
-<!--        <pi.ipnumber>${pi.hostname}.local</pi.ipnumber>  &lt;!&ndash; change to concrete ip-number if hostname is not unique in wlan &ndash;&gt;-->
+        <!--        <pi.ipnumber>${pi.hostname}.local</pi.ipnumber>  &lt;!&ndash; change to concrete ip-number if hostname is not unique in wlan &ndash;&gt;-->
         <pi.port>22</pi.port>
         <pi.username>daniel</pi.username>
         <pi.password>admin</pi.password>
@@ -61,6 +61,9 @@
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-surefire-plugin.version>3.2.1</maven-surefire-plugin.version>
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
+        <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -177,7 +180,37 @@
     </dependencies>
 
     <build>
+        <finalName>alchemy-fatjar</finalName>
         <plugins>
+
+            <!--Fat Jar -->
+
+            <!--
+            https://maven.apache.org/plugins/maven-shade-plugin/
+            This plugin provides the capability to package the artifact in an uber-jar, including its dependencies and
+            to shade - i.e. rename - the packages of some of the dependencies. The transformer will combine the files
+            in the META-INF.services directories of multiple Pi4J plugins with the same package name into one file.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade-plugin.version}</version>
+                <configuration>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                    </transformers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- JAVA FX -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -321,6 +354,21 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${exec-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
