@@ -20,7 +20,7 @@ public class AlchemyPhysicalUI extends PuiBase<State, ApplicationFXModuleControl
 
     @Override
     public void initializeParts() {
-        led = new SimpleLed(pi4J, PIN.D22);
+        led = new SimpleLed(pi4J, PIN.D23);
     }
 
     private void setupHardwareToActionBindings(){
